@@ -1,7 +1,43 @@
+'use client'
 import Link from "next/link"
-
+import { useState , useEffect } from "react"
+import { signIn } from "next-auth/react"
+import { useRouter } from "next/navigation"
+import { useSession } from "next-auth/react"
 
 const LoginPage = () => {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [error, setError] = useState('')
+
+    const router = useRouter();
+    const {data : session} = useSession();
+    useEffect (()=>{
+        if(session){
+            router.replace('/')
+        }
+    },[session])
+
+    const handlesubmit = async (e) =>{
+        e.preventDefault();
+
+        try {
+            const res = await signIn("credentials",{
+                email , password , redirect:false
+            })
+
+            if(res.error){
+                setError("เกิดข้อผิดพลาดโปรดลองอีกครั้ง")
+                return;
+            }
+        
+            router.replace('/')
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <>
             <div className="bg-purple-50 h-screen">
@@ -12,23 +48,30 @@ const LoginPage = () => {
                         </div>
 
                         <div>
-                            <form
+                            <form onSubmit={handlesubmit}
                                 className="p-5  bg-white flex flex-col w-[300px] ">
                                 <h1 className="text-center text-2xl ">เข้าสู่ระบบ</h1>
                                 <hr className="my-3 text-gray-400" />
 
                                 <div >
                                     <label htmlFor="">อีเมล</label>
-                                    <input type="email" className="border my-2 py-2 block w-full rounded-2xl" />
+                                    <input type="email" onChange={(e)=>setEmail(e.target.value)} className="border my-2 py-2 block w-full rounded-2xl" />
                                 </div>
                                 <div >
                                     <label htmlFor="">รหัสผ่าน</label>
-                                    <input type="password" className="border my-2 py-2 block w-full rounded-2xl" />
+                                    <input type="password" onChange={(e)=>setPassword(e.target.value)} className="border my-2 py-2 block w-full rounded-2xl" />
                                 </div>
-                                <p className="underline font-medium">ลืมรหัสผ่าน ? </p>
+                                <Link href={'/resetpassword/requestresetpage'} className="underline font-medium">ลืมรหัสผ่าน ? </Link>
+
+                                {error && (
+                                    <div className="text-red-500 ">
+                                        {error}
+                                    </div>
+                                )}
+
                                 <hr className=" my-3 text-gray-400" />
                                 <p>คุณยังไม่มีบัญชีใช่ไหม ? <Link href={'/register'} className="text-blue-500 underline">สมัครสมาชิก</Link></p>
-                                <button type="submit" className=" my-2 py-2 rounded-2xl bg-gray-300 ">Sign In</button>
+                                <button type="submit" className=" my-2 py-2 rounded-2xl bg-gray-300 ">เข้าสู่ระบบ</button>
                             </form>
                         </div>
                     </section>

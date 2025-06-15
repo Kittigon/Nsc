@@ -1,0 +1,24 @@
+import prisma from "@/utils/db"
+import { NextResponse } from "next/server"
+
+
+// หา 1 คน
+export async function GET(req, { params }) {
+    const { id } = await params
+    try {
+        const showUser = await prisma.scorequiz.findMany({
+            where: {
+                id: parseInt(id)
+            },
+            include: {
+                user: true,
+                quiz: true
+            }
+        })
+
+        return NextResponse.json({ showUser })
+    } catch (error) {
+        console.log(error)
+        return NextResponse.json({ message: "Sever Error !" }, { status: 400 })
+    }
+}

@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Users {
+  id          Int         @id @default(autoincrement())
+  email       String      @unique
+  password    String
+  fname       String
+  lname       String
+  age         Int?
+  gender      String?
+  phonenumber Int?
+  role Role @default(USER)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  Scorequiz   Scorequiz[]
+}
+
+enum Role{
+  USER
+  ADMIN
+}
+
+
+model Quiz {
+  id        Int         @id @default(autoincrement())
+  name      String
+  numofItem Int
+  Scorequiz Scorequiz[]
+}
+
+model Scorequiz {
+  id              Int     @id @default(autoincrement())
+  user            Users   @relation(fields: [userId], references: [id])
+  userId          Int
+  quiz            Quiz    @relation(fields: [quizId], references: [id])
+  quizId          Int
+  //สำหรับแบบทดสอบ 9Q
+  score9q         Int?
+  level9q         String?
+  // สำหรับแบบทดสอบ Dash-21
+  scoredepression Int?
+  scoreanxious    Int?
+  scorestressed   Int?
+  leveldepression String?
+  levelanxious    String?
+  levelstressed   String?
+
+  createdAt DateTime @default(now())
+}

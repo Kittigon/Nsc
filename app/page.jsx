@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <>
       <div className=" bg-purple-50 min-h-screen relative">
-        <div className='bg-purple-400 rounded-tr-2xl rounded-br-2xl absolute left-0 w-sm text-center
+        <div className='bg-purple-400 rounded-tr-2xl rounded-br-2xl absolute left-0 w-60 text-center
           lg:w-lg
         '>
           <h1 className=" text-3xl p-4  text-white
