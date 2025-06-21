@@ -2,7 +2,8 @@
 import { useState, useEffect } from "react"
 import { Trash2 } from 'lucide-react';
 import { Pencil } from 'lucide-react';
-import moment from "moment/min/moment-with-locales";
+import moment from 'moment'
+import 'moment/locale/th'
 
 const ManagePage = () => {
     const [newpassword, setNewpassword] = useState('')

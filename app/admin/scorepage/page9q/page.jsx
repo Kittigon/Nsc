@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from "react"
-import moment from "moment/min/moment-with-locales";
+import moment from 'moment'
+import 'moment/locale/th'
 
 
 const Score9Q = () => {
