@@ -7,6 +7,7 @@ export default withAuth({
     callbacks: {
         authorized({ token, req }) {
             console.log(" Middleware running for:", req.nextUrl.pathname)
+            console.log(token)
             return !!token
         }
     }
@@ -24,6 +25,6 @@ export const config = {
         "/admin/(.*)",
         "/changepassword",
         "/changepassword/(.*)",
-        
+
     ]
 }
