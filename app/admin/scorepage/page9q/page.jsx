@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react"
 import moment from 'moment'
 import 'moment/locale/th'
+import { X } from 'lucide-react';
 
 
 const Score9Q = () => {
@@ -23,6 +24,23 @@ const Score9Q = () => {
 
         } catch (error) {
             console.log("Error loadData Error !", error)
+        }
+    }
+
+    const handledelet = async (id) => {
+        try {
+            const res = await fetch('/api/scorequiz/'+id , {
+                method:"DELETE",
+                headers:{
+                    "Content-Type": "application/json"
+                },
+            })
+            if (res.ok) {
+                alert("ลบแบบประเมินสำเร็จ")
+                loadData();
+            }
+        } catch (error) {
+            console.log("Error Delete :" + error)
         }
     }
 
@@ -62,6 +80,14 @@ const Score9Q = () => {
                                         <td>{item.level9q}</td>
                                         <td>
                                             {moment(item.createdAt).locale('th').format('L')}
+                                        </td>
+                                        <td>
+                                            <button 
+                                            onClick={()=>{handledelet(item.id)}}
+                                            className=" text-red-500 btn"
+                                            >
+                                                <X/>
+                                            </button>
                                         </td>
                                     </tr>
                                 )}

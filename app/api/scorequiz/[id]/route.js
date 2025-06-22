@@ -22,3 +22,19 @@ export async function GET(req, { params }) {
         return NextResponse.json({ message: "Sever Error !" }, { status: 400 })
     }
 }
+
+// ลบผลคะแนน
+export async function DELETE(req, { params }) {
+    const { id } = await params
+    try {
+        const remove = await prisma.scorequiz.delete({
+            where: {
+                id: parseInt(id)
+            }
+        })
+        return NextResponse.json({ message: " Delete Scorequiz Success !" }, { status: 200 })
+    } catch (error) {
+        console.log(error)
+        return NextResponse.json({ message: "Sever delete Scorequiz Error!" }, { status: 400 })
+    }
+}
