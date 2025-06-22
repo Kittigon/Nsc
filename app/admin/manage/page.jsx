@@ -19,7 +19,7 @@ const ManagePage = () => {
 
     const loadData = async () => {
         try {
-            const res = await fetch("http://localhost:3000/api/user", {
+            const res = await fetch("/api/user", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -35,7 +35,7 @@ const ManagePage = () => {
 
     const handleDelete = async (id) => {
         try {
-            const res = await fetch("http://localhost:3000/api/user/" + id, {
+            const res = await fetch("/api/user/" + id, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
@@ -67,7 +67,7 @@ const ManagePage = () => {
         const password = newpassword;
 
         try {
-            const res = await fetch('http://localhost:3000/api/user/' + id, {
+            const res = await fetch('/api/user/' + id, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json"

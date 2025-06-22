@@ -47,7 +47,7 @@ const Page9Q = () => {
             }
 
 
-            const res = await fetch('http://localhost:3000/api/scorequiz',{
+            const res = await fetch('/api/scorequiz',{
                 method:"POST",
                 headers:{
                     'Content-Type':'application/json'

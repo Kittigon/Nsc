@@ -93,7 +93,7 @@ const PageDash21 = () => {
                 levelstressed : risklevel("stressed", scores.stressed)
             }
 
-            const res = await fetch('http://localhost:3000/api/scorequiz',{
+            const res = await fetch('/api/scorequiz',{
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json"

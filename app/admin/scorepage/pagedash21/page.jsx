@@ -11,7 +11,7 @@ const ScoreDash21 = () => {
 
     const loadData = async () => {
         try {
-            const res = await fetch('http://localhost:3000/api/scorequiz', {
+            const res = await fetch('/api/scorequiz', {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -25,7 +25,6 @@ const ScoreDash21 = () => {
         }
     }
 
-    console.log(data)
     return (
         <>
             <div className=" bg-purple-50 min-h-screen relative">

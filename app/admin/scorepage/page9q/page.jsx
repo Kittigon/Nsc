@@ -12,7 +12,7 @@ const Score9Q = () => {
 
     const loadData = async () => {
         try {
-            const res = await fetch('http://localhost:3000/api/scorequiz', {
+            const res = await fetch('/api/scorequiz', {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -26,7 +26,6 @@ const Score9Q = () => {
         }
     }
 
-    console.log(data)
 
     return (
         <>

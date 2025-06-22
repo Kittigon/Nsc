@@ -27,7 +27,7 @@ const EditProfile = () => {
 
     const loadData = async (id) => {
         try {
-            const res = await fetch('http://localhost:3000/api/user/' + id, {
+            const res = await fetch(`/api/user/` + id, {
                 method: "GET",
                 headers: {
                     "Content-type": "application/json"
@@ -52,7 +52,7 @@ const EditProfile = () => {
         e.preventDefault();
 
         try {
-            const res = await fetch("http://localhost:3000/api/user/" + id, {
+            const res = await fetch("/api/user/" + id, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
